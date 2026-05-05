@@ -19,7 +19,7 @@ public class ApiExceptionHandler {
     }
 
 
-
+// exceptional handler added in the project
 
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
