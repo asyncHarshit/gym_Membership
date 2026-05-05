@@ -1,7 +1,7 @@
 package com.example.gym.config;
 
-// adding config files
 
+// adding config files
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

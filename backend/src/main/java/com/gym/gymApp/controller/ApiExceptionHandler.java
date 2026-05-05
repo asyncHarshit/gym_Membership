@@ -7,6 +7,9 @@ import java.time.Instant;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+
+// controllers
+// added in this
 @RestControllerAdvice
 public class ApiExceptionHandler {
     @ExceptionHandler({IllegalArgumentException.class, IllegalStateException.class})
@@ -14,6 +17,9 @@ public class ApiExceptionHandler {
     public Map<String, Object> badRequest(RuntimeException ex) {
         return Map.of("timestamp", Instant.now(), "error", ex.getMessage());
     }
+
+
+
 
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
