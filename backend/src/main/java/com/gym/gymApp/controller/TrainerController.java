@@ -11,6 +11,10 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+
+// trainer controller
+
+// trainer controller have been added 
 @RestController
 @RequestMapping("/api/trainer")
 public class TrainerController {
