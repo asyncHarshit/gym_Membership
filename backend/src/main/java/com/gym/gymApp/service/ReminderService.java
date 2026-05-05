@@ -1,4 +1,4 @@
-package com.gym.membership.service;
+package com.gym.gymApp.service;
 
 import com.gym.membership.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,19 +9,29 @@ import java.util.logging.Logger;
 
 @Service
 public class ReminderService {
-    
     private static final Logger logger = Logger.getLogger(ReminderService.class.getName());
+    private static final String MEMBER_ROLE = "ROLE_MEMBER";
+
+    private final UserRepository userRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    public ReminderService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-    // Run every day at midnight (simulation)
+    /**
+     * Scheduled task that runs daily at midnight.
+     * This currently simulates sending reminder notifications to active members.
+     */
     @Scheduled(cron = "0 0 0 * * ?")
     public void sendMembershipReminders() {
-        logger.info("Checking for expiring memberships...");
-        // Logic to find users with planId expiring soon and "send" notifications
+        logger.info("Membership reminder job started.");
+
         userRepository.findAll().stream()
-            .filter(u -> u.isActive() && u.getRole().name().equals("ROLE_MEMBER"))
+            .filter(u -> u != null && u.isActive() && u.getRole() != null)
+            .filter(u -> MEMBER_ROLE.equals(u.getRole().name()))
             .forEach(u -> logger.info("Reminder sent to: " + u.getEmail()));
+
+        logger.info("Membership reminder job completed.");
     }
 }
