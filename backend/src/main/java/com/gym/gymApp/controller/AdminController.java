@@ -33,6 +33,7 @@ public class AdminController {
         return gymService.members();
     }
 
+    // adding new member
     @PostMapping("/members/renew")
     public Membership renew(@Valid @RequestBody PurchasePlanRequest request) {
         return gymService.purchasePlan(request);
