@@ -39,6 +39,8 @@ public class TrainerController {
         return gymService.progress(memberId);
     }
 
+
+    // for getting the client
     @GetMapping("/clients/{memberId}/workouts")
     public List<WorkoutLog> clientWorkouts(@PathVariable Long memberId) {
         return gymService.workouts(memberId);
