@@ -11,6 +11,10 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/**
+ * Entry point for unauthorized requests.
+ * This is invoked when a request without valid authentication tries to access a protected endpoint.
+ */
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
@@ -19,7 +23,13 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
             throws IOException, ServletException {
-        logger.error("Unauthorized error: {}", authException.getMessage());
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
+        // Log the unauthorized access attempt and the reason from the authentication exception.
+        logger.error("Unauthorized error at [{} {}]: {}",
+                request.getMethod(), request.getRequestURI(), authException.getMessage());
+
+        // Return a 401 Unauthorized response to the client.
+        response.setContentType("application/json");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getWriter().write("{\"error\": \"Unauthorized\", \"message\": \"Access denied\"}");
     }
 }
