@@ -35,16 +35,25 @@ public class MemberController {
         return gymService.plans();
     }
 
+
+
+// for purchase
+
     @PostMapping("/purchase")
     public Membership purchase(@Valid @RequestBody PurchasePlanRequest request) {
         return gymService.purchasePlan(request);
     }
 
+
+    // for attendence
     @PostMapping("/check-in")
     public Attendance checkIn(@Valid @RequestBody CheckInRequest request) {
         return gymService.checkIn(request);
     }
 
+
+
+    //  for workout
     @PostMapping("/workouts")
     public WorkoutLog logWorkout(@Valid @RequestBody WorkoutLogRequest request) {
         return gymService.logWorkout(request);
@@ -54,6 +63,8 @@ public class MemberController {
     public List<WorkoutLog> workouts(@PathVariable Long memberId) {
         return gymService.workouts(memberId);
     }
+
+
 
     @PostMapping("/metrics")
     public BodyMetric addMetric(@Valid @RequestBody BodyMetricRequest request) {
@@ -65,11 +76,17 @@ public class MemberController {
         return gymService.progress(memberId);
     }
 
+
+
+    // diet plans
     @GetMapping("/{memberId}/diet-plans")
     public List<DietPlan> dietPlans(@PathVariable Long memberId) {
         return gymService.dietPlans(memberId);
     }
 
+
+
+    // for sessions
     @GetMapping("/sessions")
     public List<TrainingSession> availableSessions() {
         return gymService.availableSessions();
