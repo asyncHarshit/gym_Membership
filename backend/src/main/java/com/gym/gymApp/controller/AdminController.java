@@ -10,6 +10,10 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+
+// admin controller
+
+// we have added controller in this 
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController {
